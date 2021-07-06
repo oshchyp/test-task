@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Model\UserCRUDModelInterface;
 use App\Object\Request\UserSearchRequest;
-use mysql_xdevapi\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,17 +32,9 @@ final class UserController extends ApiControllerAbstract
      */
     public function index(UserSearchRequest $userSearchRequest): JsonResponse
     {
-        $pag = $this->model->search($userSearchRequest);
-//        foreach ($pag->getElements() as $el){
-//            dd($el);
-//        }
-        try {
-            return $this->apiResponse(
-                $this->model->search($userSearchRequest)
-            );
-        } catch (\Throwable $exception){
-            dd($exception);
-        }
+        return $this->apiResponse(
+            $this->model->search($userSearchRequest)
+        );
     }
 
     /**
