@@ -1,0 +1,32 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+            - '../src/Exception/'
+            - '../src/Object/'
+
+    App\EventListener\JsonContentListener:
+      tags:
+        - { name: kernel.event_listener, event: kernel.controller }
+
+#    App\EventListener\FormValidationFailedListener:
+#      tags:
+#        - { name: kernel.event_listener, event: kernel.exception }
+#
+#    App\EventListener\ValidationFailedListener:
+#      tags:
+#        - { name: kernel.event_listener, event: kernel.exception }
+#
+#    App\EventListener\BadRequestListener:
+#      tags:
+#        - { name: kernel.event_listener, event: kernel.exception }
